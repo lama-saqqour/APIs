@@ -39,7 +39,6 @@ class Trip extends Model
         'to',
         'start_date',
         'end_date',
-        
     ];
     
     /**

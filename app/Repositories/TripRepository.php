@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Models\Blog;
 use App\Interfaces\SimpleRepositoryInterface;
 use Illuminate\Support\Facades\Log;
 use Google\Service\SemanticTile\TriangleStrip;
@@ -47,6 +46,8 @@ class TripRepository implements SimpleRepositoryInterface {
 
     public function create($data)
     {
+        
+        //log::info(print_r("Here?",true));
         //log::info(print_r($data,true));
         return Trip::create($data);
     }

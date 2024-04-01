@@ -29,6 +29,16 @@ class Discount extends Model
         'percentage',
     ];
     
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'deleted_at' => 'datetime',
+    ];
 
     protected $table = 'discounts';
     

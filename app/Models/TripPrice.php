@@ -40,7 +40,6 @@ class TripPrice extends Model
         'start_date',
         'end_date',
         'initial_price',
-        
     ];
     
     /**

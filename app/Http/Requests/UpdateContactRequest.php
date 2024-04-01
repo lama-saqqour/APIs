@@ -24,7 +24,7 @@ class UpdateContactRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $store =  [
             'name' => 'string|nullable',
             'email' => 'string|nullable',
             'phone' => 'string|nullable',
@@ -33,5 +33,24 @@ class UpdateContactRequest extends FormRequest
             'instagram' => 'string|nullable',
             'twitter' => 'string|nullable',
         ];
+        $update =  [
+            'name' => 'string|nullable',
+            'email' => 'string|nullable',
+            'phone' => 'string|nullable',
+            'whatsapp' => 'string|nullable',
+            'facebook' => 'string|nullable',
+            'instagram' => 'string|nullable',
+            'twitter' => 'string|nullable',
+        ];
+        return ($this->method() === 'POST') ? $store : $update;
+    /*    return [
+            'name' => 'string|nullable',
+            'email' => 'string|nullable',
+            'phone' => 'string|nullable',
+            'whatsapp' => 'string|nullable',
+            'facebook' => 'string|nullable',
+            'instagram' => 'string|nullable',
+            'twitter' => 'string|nullable',
+        ];*/
     }
 }

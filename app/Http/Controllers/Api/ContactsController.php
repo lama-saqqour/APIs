@@ -7,17 +7,34 @@ use App\Models\Contact;
 use App\Http\Requests\StoreContactRequest;
 use App\Http\Requests\UpdateContactRequest;
 use App\Http\Resources\ContactResource;
+use App\Repositories\ContactRepository;
 
 class ContactsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    protected $contact;
+
+    public function __construct(ContactRepository $contactRepository)
+    {
+        $this->contact = $contactRepository;
+    }
     public function index()
     {
         return ContactResource::collection(
             Contact::query()->get()
         );
+    }
+    public function store(UpdateContactRequest $request)
+    {
+        //Log::info(print_r(["Request starts"],true));
+        $data = $request->validated();
+        $data = $request->collect((new Contact())->getFillable())
+            ->toArray();
+        $contact = $this->contact->create($data);
+
+        return $contact ? response(new ContactResource($contact),201) : response(__("Cannot create Contact, contact technical support!!"), 500);
     }
 
     /**
@@ -38,5 +55,13 @@ class ContactsController extends Controller
         return new ContactResource($contact);
     }
 
+    public function destroy($id)
+    {
+        if (! $id)
+            return response(__("You Should Provide Contact id"), 500);
+        else
+            $res = $this->contact->delete($id);
+        return ($res == 1) ? response(__("Contact Deleted Successfully"), 200) : response(__("Contact not found"), 404);
+    }
 
 }

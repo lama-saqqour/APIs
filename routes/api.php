@@ -14,6 +14,13 @@ use App\Http\Controllers\Api\TripsController;
 use App\Http\Controllers\Api\PaymentMethodController;
 use App\Http\Controllers\Api\SightseeingController;
 use App\Http\Controllers\Api\SightseeingPriceController;
+use App\Http\Controllers\Api\TripsPriceController;
+use App\Http\Controllers\Api\CategoriesController;
+use App\Http\Controllers\Api\AdditionalServicesController;
+use App\Http\Controllers\Api\AdditionalInfoController;
+use App\Http\Controllers\Api\DiscountsController;
+use App\Http\Controllers\Api\PaymentController;
+use App\Http\Controllers\Api\UserTypesController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -42,6 +49,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/payment_methods', PaymentMethodController::class);
     Route::apiResource('/sightseeings', SightseeingController::class);
     Route::apiResource('/sightseeings_price', SightseeingPriceController::class);
+    Route::apiResource('/trips', TripsController::class);
+    Route::apiResource('/trips_prices', TripsPriceController::class);
+    Route::apiResource('/categories', CategoriesController::class);
+    Route::apiResource('/additional_services', AdditionalServicesController::class);
+    Route::apiResource('/additional_info', AdditionalInfoController::class);
+    Route::apiResource('/discounts', DiscountsController::class);
+    Route::apiResource('/payments', PaymentController::class);
+    Route::apiResource('/user_types', UserTypesController::class);
 });
 
 Route::post('/login', [AuthController::class, 'login']);
@@ -49,7 +64,15 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/confirm-email', [AuthController::class, 'confirmEmail']);
 Route::post('/confirm-code', [AuthController::class, 'confirmCode']);
 Route::get('/trips_filters', [TripsController::class,'index']);
+Route::get('/all_trip_prices', [TripsPriceController::class,'index']);
 Route::get('/cars_filters', [CarsController::class,'index']);
 Route::get('/all_payment_methods', [PaymentMethodController::class,'index']);
 Route::get('/all_sightseeings', [SightseeingController::class,'index']);
 Route::get('/all_sightseeings_prices', [SightseeingPriceController::class,'index']);
+Route::get('/all_categories', [CategoriesController::class,'index']);
+Route::get('/all_additional_services', [AdditionalServicesController::class,'index']);
+Route::get('/all_additional_info', [AdditionalInfoController::class,'index']);
+Route::get('/all_contacts', [ContactsController::class,'index']);
+Route::get('/all_discounts', [DiscountsController::class,'index']);
+Route::get('/all_payments', [PaymentController::class,'index']);
+Route::get('/all_user_types', [UserTypesController::class,'index']);

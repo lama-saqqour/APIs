@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Booking extends Model
 {
@@ -87,5 +88,9 @@ class Booking extends Model
     public function payments()
     {
         return $this->hasMany(Payment::class,'bookings_id');
+    }
+    public function services(): MorphToMany
+    {
+        return $this->morphToMany(AdditionalServices::class,'servicable');
     }
 }
