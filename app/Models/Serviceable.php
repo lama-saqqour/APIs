@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Notifications\Notifiable;
 
-class AdditionalServices extends Model
+class Serviceable extends Model
 {
-    use HasFactory;
-
+    use HasFactory, Notifiable, SoftDeletes;
+    
     /**
      * The attributes that aren't mass assignable.
      *
@@ -25,6 +26,7 @@ class AdditionalServices extends Model
     protected $hidden = [
         'created_at',
         'updated_at',
+        'deleted_at',
     ];
     
     /**
@@ -33,11 +35,10 @@ class AdditionalServices extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'serve_at',
-        'price'
+        'serviceable_id',
+        'services_id',
     ];
-
+    
     /**
      * The attributes that should be cast.
      *
@@ -46,12 +47,18 @@ class AdditionalServices extends Model
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
+        'deleted_at' => 'datetime',
     ];
     
-    protected $table = 'services';
-
-    public function bookings(): MorphToMany
+    protected $table = 'serviceables';
+    
+    public function services()
     {
-        return $this->morphedByMany(Booking::class, 'serviceable');
+        return $this->belongsTo(Services::class,'services_id');
     }
+    public function bookings()
+    {
+        return $this->belongsTo(Booking::class,'serviceable_id');
+    }
+
 }

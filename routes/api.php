@@ -16,11 +16,12 @@ use App\Http\Controllers\Api\SightseeingController;
 use App\Http\Controllers\Api\SightseeingPriceController;
 use App\Http\Controllers\Api\TripsPriceController;
 use App\Http\Controllers\Api\CategoriesController;
-use App\Http\Controllers\Api\AdditionalServicesController;
+use App\Http\Controllers\Api\ServicesController;
 use App\Http\Controllers\Api\AdditionalInfoController;
 use App\Http\Controllers\Api\DiscountsController;
 use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\UserTypesController;
+use App\Http\Controllers\Api\ServiceablesController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -52,11 +53,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/trips', TripsController::class);
     Route::apiResource('/trips_prices', TripsPriceController::class);
     Route::apiResource('/categories', CategoriesController::class);
-    Route::apiResource('/additional_services', AdditionalServicesController::class);
+    Route::apiResource('/services', ServicesController::class);
     Route::apiResource('/additional_info', AdditionalInfoController::class);
     Route::apiResource('/discounts', DiscountsController::class);
     Route::apiResource('/payments', PaymentController::class);
     Route::apiResource('/user_types', UserTypesController::class);
+    Route::apiResource('/servicables', ServiceablesController::class);
+
 });
 
 Route::post('/login', [AuthController::class, 'login']);
@@ -70,9 +73,11 @@ Route::get('/all_payment_methods', [PaymentMethodController::class,'index']);
 Route::get('/all_sightseeings', [SightseeingController::class,'index']);
 Route::get('/all_sightseeings_prices', [SightseeingPriceController::class,'index']);
 Route::get('/all_categories', [CategoriesController::class,'index']);
-Route::get('/all_additional_services', [AdditionalServicesController::class,'index']);
+Route::get('/all_services', [ServicesController::class,'index']);
 Route::get('/all_additional_info', [AdditionalInfoController::class,'index']);
 Route::get('/all_contacts', [ContactsController::class,'index']);
 Route::get('/all_discounts', [DiscountsController::class,'index']);
 Route::get('/all_payments', [PaymentController::class,'index']);
 Route::get('/all_user_types', [UserTypesController::class,'index']);
+Route::get('/all_servicables', [ServiceablesController::class,'index']);
+Route::get('/all_bookings', [BookingsController::class,'index']);

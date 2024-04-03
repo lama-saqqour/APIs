@@ -89,8 +89,8 @@ class Booking extends Model
     {
         return $this->hasMany(Payment::class,'bookings_id');
     }
-    public function services(): MorphToMany
+    public function services()
     {
-        return $this->morphToMany(AdditionalServices::class,'servicable');
+        return $this->morphToMany(Services::class,'serviceable');
     }
 }
